@@ -1,0 +1,18 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: index-populate
+spec:
+  completions: 3
+  parallelism: 3
+  template:
+    spec:
+      containers:
+      - name: index-populate
+        image: tapxxor/es-populate:0.0.1
+        env:
+        - name: INDEXSIZE
+          value: '1000'
+        - name: ESURL
+          value: 'es-elasticsearch-client:9200'
+      restartPolicy: Never

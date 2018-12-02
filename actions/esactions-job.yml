@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: es-actions
+  labels:
+    app: es-actions
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: es-actions
+  template:
+    metadata:
+      labels:
+        app: es-actions
+    spec:
+      containers:
+      - name: es-actions
+        image: tapxxor/es-actions:0.0.1
+        env:
+        - name: INDEXSIZE
+          value: '1000'
+        - name: ESURL
+          value: 'es-elasticsearch-client:9200'
